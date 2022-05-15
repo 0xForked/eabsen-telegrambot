@@ -1,0 +1,16 @@
+version: "3"
+
+# Define services
+services:
+  # App Service
+  telebot:
+    # Configuration for building the docker image for the service
+    build:
+      # Use an image built from the specified dockerfile in the current directory.
+      context: .
+      # Load docker file
+      dockerfile: Dockerfile
+    # Set container name
+    container_name: oksetda_telegram_svc
+    # make auto restart
+    restart: always

@@ -1,0 +1,26 @@
+[Unit]
+Description=OkSetda Absensi TelegramBot
+ConditionPathExists=/{path_to_service}/bin/svc-tgbotgo
+After=network.target
+
+[Service]
+Type=simple
+User={selected_user}
+Group={selected_group}
+Restart=on-failure
+RestartSec=10
+startLimitIntervalSec=60
+WorkingDirectory=/{path_to_service}/bin/svc-tgbotgo
+ExecStart=/{path_to_service}/bin/svc-tgbotgo
+
+# make sure log directory exists and owned by syslog
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -p /var/log/svc-tgbotgo
+ExecStartPre=/bin/chown syslog:adm /var/log/svc-tgbotgo
+ExecStartPre=/bin/chmod 755 /var/log/svc-tgbotgo
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=svc-tgbotgo
+
+[Install]
+WantedBy=multi-user.target
